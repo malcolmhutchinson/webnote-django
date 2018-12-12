@@ -14,37 +14,46 @@ linked with other documents within the filesystem.
 Installation
 ------------
 
+These instructions list the steps necessary to install into a django
+development environment. You will need to clone the
+[webnote](https://github.com/malcolmhutchinson/webnote) repository,
+and then the [webnote-django]() repo. I assume installation into a
+directory at `~/dev/`. If this directory doesn't exist, create it
+with:
+
+    mkdir ~/dev
+
+Create workspaces for both repositories. In shell:
+
+    cd ~/dev/
+    mkdir localnote webnote
+    
+Clone a copy of webnote into `~/dev/webnote`.
+
+    git clone https://github.com/malcolmhutchinson/webnote.git webnote/
+
+Now set up the development environment for the Django server.
+
 If you are unfamiliar with Django, I recommend following the
 [Django tutorial](https://docs.djangoproject.com/en/dev/intro/tutorial01/).
 
-First, you must download or clone a copy of webnote. We assume this
-has been installed in `~/dev/webnote`.
+In shell:
 
-To install the localnote code into a Django development environment,
-follow these steps.
+    cd ~/dev/localnote/
+    mkdir code
+    git clone https://github.com/malcolmhutchinson/webnote-django.git code/
 
-Create a development directory:
 
-    $ mkdir ~/dev/webnote
-    $ cd ~/dev/webnote
+Install a Python virtual environment. 
 
-Make a directory to hold the code under version control:
-
-    $ mkdir code
-
-Clone the code from github:
-
-    $ git clone https://github.com/malcolmhutchinson/webnote.git code/
-
-Install a virtual environment. 
-
-    $ virtualenv env
+    virtualenv env
 
 You will have to install Django, and a number of other dependencies,
 into the environment:
 
-    $ source env/bin/activate
-    (env) $ pip install django markdown2 bs4 exifread Pillow smartypants
+    source env/bin/activate
+    pip install --upgrade pip
+    pip install django markdown2 bs4 exifread Pillow smartypants
 
 You will have to put the webnote package onto your path. I've done
 this by placing a simlink in my virtual environment at
@@ -67,7 +76,9 @@ In order to see your figures and image files displayed inline on pages
 in the webserver, you will have to add a symlink in the Django
 project's `static` folder:
 
-    $ ln -s /home/malcolm/www ~/dev/webnote/code/djsrv/static/home/malcolm
+    cd ~/dev/localnote/code/static
+    mkdir home
+    ln -s /home/malcolm/www ~/dev/localnote/code/static/home/malcolm
 
 The structure of folders and symlinks in `static/` should echo the url
 structure. Since home folders are called with url's like :
