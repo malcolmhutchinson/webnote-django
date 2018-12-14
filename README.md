@@ -58,7 +58,7 @@ into the environment:
 You will have to put the webnote package onto your path. I've done
 this by placing a simlink in my virtual environment at
 
-    $ ln -s ~/dev/webnote/ ~/dev/webnote/env/lib/python2.7/site-packages/webnote
+    ln -s ~/dev/webnote/ ~/dev/localnote/env/lib/python2.7/site-packages/webnote
 
 Now, run the Django development server:
 
@@ -67,6 +67,15 @@ Now, run the Django development server:
 And point your browser at localhost, port 8000:
 
     http://localhost:8000/
+
+The first time you run this, it will probably give you a migrations
+warning. If so, quit out of the server with CTL-C, and type
+
+    ./manage.py migrate
+
+Then run the Django development server again:
+
+    python code/djsrv/manage.py runserver
 
 You should see a page indexing pages in your own `~/www` folder, and a
 list of other users (if any) on the system. This will index any folder
