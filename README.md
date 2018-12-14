@@ -40,8 +40,7 @@ If you are unfamiliar with Django, I recommend following the
 In shell:
 
     cd ~/dev/localnote/
-    mkdir code
-    git clone https://github.com/malcolmhutchinson/webnote-django.git code/
+    git clone https://github.com/malcolmhutchinson/webnote-django.git ./code
 
 
 Install a Python virtual environment. 
@@ -58,7 +57,7 @@ into the environment:
 You will have to put the webnote package onto your path. I've done
 this by placing a simlink in my virtual environment at
 
-    $ ln -s ~/dev/webnote/ ~/dev/webnote/env/lib/python2.7/site-packages/webnote
+    ln -s ~/dev/webnote/ ~/dev/localnote/env/lib/python2.7/site-packages/webnote
 
 Now, run the Django development server:
 
