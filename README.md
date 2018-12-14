@@ -40,8 +40,7 @@ If you are unfamiliar with Django, I recommend following the
 In shell:
 
     cd ~/dev/localnote/
-    mkdir code
-    git clone https://github.com/malcolmhutchinson/webnote-django.git code/
+    git clone https://github.com/malcolmhutchinson/webnote-django.git ./code
 
 
 Install a Python virtual environment. 
