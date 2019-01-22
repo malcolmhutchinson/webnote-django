@@ -67,6 +67,15 @@ And point your browser at localhost, port 8000:
 
     http://localhost:8000/
 
+The first time you run this, it will probably give you a migrations
+warning. If so, quit out of the server with CTL-C, and type
+
+    ./manage.py migrate
+
+Then run the Django development server again:
+
+    python code/djsrv/manage.py runserver
+
 You should see a page indexing pages in your own `~/www` folder, and a
 list of other users (if any) on the system. This will index any folder
 in `/home` which contains a folder called `www`.
