@@ -27,7 +27,7 @@ SECRET_KEY = '!2ej1_ejs_zw7=d6ftu)8^()w4w0cb$uznixig4@y3k7sv#!9t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localnote', 'localhost']
 
 
 # Application definition
@@ -129,6 +129,6 @@ STATICFILES_DIRS = [
 
 HOST_DATA = {
     'hostname': socket.gethostname(),
-    'userdir': os.path.join(os.environ['HOME'], 'www'),
+    'userdir': '/home/', #os.path.join(os.environ['HOME'], 'www'),
     'username': getpass.getuser(),
 }
