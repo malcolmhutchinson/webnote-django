@@ -17,7 +17,6 @@ import socket
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -27,7 +26,7 @@ SECRET_KEY = '!2ej1_ejs_zw7=d6ftu)8^()w4w0cb$uznixig4@y3k7sv#!9t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localnote', 'localnote.hikurangi',]
 
 
 # Application definition
@@ -122,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/var/www/localnote/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -129,6 +129,6 @@ STATICFILES_DIRS = [
 
 HOST_DATA = {
     'hostname': socket.gethostname(),
-    'userdir': os.path.join(os.environ['HOME'], 'www'),
+    'userdir': '', #os.path.join(os.environ['HOME'], 'www'),
     'username': getpass.getuser(),
 }
