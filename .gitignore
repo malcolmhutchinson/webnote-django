@@ -10,6 +10,4 @@
 *.PDF
 *.tif
 *.data
-djsrv/static/home/
-djsrv/static/srv/
-djsrv/static/test
+static/admin

@@ -18,11 +18,6 @@ import webnote
 # (url_prefix, docroot, link text).
 ARCHIVES = [
     (
-        '/manual', os.path.join(settings.STATICFILES_DIRS[0], 'manual'),
-        "Webnote manual and test pages"
-    ),
-
-    (
         '/ruapehu', os.path.join(settings.STATICFILES_DIRS[0], 'ruapehu'),
         "Notes held on the ruapehu server.",
     ),
@@ -36,7 +31,8 @@ def index(request):
     """
 
     userspaces = []
-    baseurl = None
+    dirpath = '/home/malcolm/www'
+    baseurl = '/'
 
     for user in os.listdir('/home'):
         dirname = os.path.join('/home', user, 'www')
@@ -48,8 +44,7 @@ def index(request):
     template = 'index.html'
 
     title = "Webnote server at " + settings.HOST_DATA['hostname']
-    index = webnote.directory.Directory(settings.HOST_DATA['userdir'],
-                                        baseurl=baseurl)
+    index = webnote.directory.Directory(dirpath=dirpath, baseurl=baseurl)
 
     breadcrumbs = [
         ('/webnote/', 'HOME'),
