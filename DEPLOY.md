@@ -144,4 +144,19 @@ You should be able to see a list of user directories which contain a
 www directory.
 
 
+### Pulling changes
+
+First, checkout master, then pull the changes down. Now checkout deploy
+and merge those changes.
+
+This will protect the deployed values in settings files.
+
+In shell:
+
+    cd /opt/localnote/code
+    git checkout master
+    git pull github master
+    git checkout deploy
+    git merge master
+
 END
