@@ -1,15 +1,11 @@
 ## How to deploy webnote
 
 This document lists the steps necessary to deploy a webnote server
-using Apache, and the WSGI (Web Server Gateway Interface)mod, on a
+using Apache, and the WSGI (Web Server Gateway Interface) mod, on a
 Debian GNU/Linux host.
 
 The idea is to have a webnote server which presents a list of all the
 user directories containing the www directory.
-
-The most important part of the process is configuring the Apache
-server to run a copy of the Django code for the webnote server.
-
 
 
 ### Some standard locations
@@ -65,7 +61,7 @@ Now we want to create a virtual host for the localnote webserver.
 
 In Debian-based systems, Apache modules and sites are configured by
 keeping configuration files in `sites-available` (or `conf-available`,
-or `mods-available`. Configurations, modules and site specifications
+or `mods-available`). Configurations, modules and site specifications
 can be enabled by linking them from `sides-enabled` as needed.
 
 We will create a configuration file, and then enable it using a Debian
@@ -113,10 +109,10 @@ Enable this with the Debian apache utility `a2ensite`, and disable the existing 
     sudo a2dissite 000-default
 
 
+### Connecting everything up
 
-
-There are directives which make the python code and static files
-available to Apache:
+There are directives in the apache config file which make the python
+code and static files available to Apache:
 
     DocumentRoot                /var/www/localnote
     Installed Python code       /opt/localnote/code/
@@ -126,68 +122,13 @@ available to Apache:
 So we make sure all the expected things are in the expected places.
 
 
-
-
-### Installing the webnote and localnote code
-
-Webnote server is dependant on webnote. You should follow all the
-instructions in the README, except that you are installing them in a
-different location, at `/opt/localnote/`, instead of
-`~/dev/localnote`.
-
-You will need to create a virtual environemt, and clone the code from
-[Webnote](https://github.com/malcolmhutchinson/webnote),
-and [webnote-django](https://github.com/malcolmhutchinson/webnote-django).
-
-
-### Make the VirtualHost file
-
-Apache is configured using text files in `/etc/apache2/` Create a file
-called `/etc/apache2/sites-available/localnote.conf', and put this in
-it:
-
-    <VirtualHost *:80>
-            # Adapted from Debian default script, with redundant stanzas
-            # removed, and comments deleted.
-
-            ServerAdmin webmaster@localhost
-            DocumentRoot /var/www/localnote
-            ServerName localnote
-            ServerAlias localnote.localhost www.localnote.localhost
-
-            ErrorLog ${APACHE_LOG_DIR}/error_localnote.log
-            CustomLog ${APACHE_LOG_DIR}/access_localnote.log combined
-
-            <Directory '/opt/localnote/code/home/'>
-                    <Files 'wsgi.py'>
-                            Require all granted
-                    </Files>
-            </Directory>
-
-            # WSGI daemon mode, which will not interfere with other
-            # virtual hosts.
-            WSGIDaemonProcess localnote \
-                python-path=/opt/localnote/env/lib/python2.7/site-packages:/opt/localnote/code \
-                python-home=/opt/localnote/env
-
-            WSGIProcessGroup localnote
-            WSGIScriptAlias / /opt/localnote/code/home/wsgi.py
-
-            Alias /static/ /var/www/localnote/
-
-    </VirtualHost>
-
-    # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
-
-### Connecting everything up
-
 Create a link from `/var/www/localnote` to the static files
 directory. In shell:
 
     sudo ln -s /opt/localnote/code/static /var/www/localnote
 
 Hopefully, that should run. You might want to make some changes to the
-`ServerAlias` directife in the apache config file, and maybe to
+`ServerAlias` directive in the apache config file, and maybe to
 ALLOWED_HOSTS in `home.settings`.
 
 I create a branch called `deploy`, in which to make these changes.
