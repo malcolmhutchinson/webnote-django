@@ -23,6 +23,8 @@ ARCHIVES = [
     ),
 ]
 
+HOSTNAME = socket.gethostname()
+
 
 def index(request):
     """List the users on the host machine, and archives from the ARCHIVES
@@ -34,6 +36,8 @@ def index(request):
     dirpath = '/home/malcolm/www'
     baseurl = '/'
 
+    context = build_context(request)
+
     for user in os.listdir('/home'):
         dirname = os.path.join('/home', user, 'www')
         if os.path.isdir(dirname):
@@ -43,30 +47,18 @@ def index(request):
 
     template = 'index.html'
 
-    title = "Webnote server at " + settings.HOST_DATA['hostname']
-    index = webnote.directory.Directory(dirpath=dirpath, baseurl=baseurl)
+    context['title'] ="Webnote server at " + HOSTNAME
+    context['h1'] = context['title']
 
-    breadcrumbs = [
-        ('/webnote/', 'HOME'),
-    ]
+    context['index'] = webnote.directory.Directory(
+        dirpath=dirpath, baseurl=baseurl)
+    context['archives'] = ARCHIVES
+    context['userspaces'] = userspaces
 
-    context = {
-
-        'title': title,
-        'index': index,
-
-        'stylesheets': {
+    context['sylesheets'] = {
             'app': None,
             'screen': 'css/screen.css',
             'printer': 'css/print.css',
-        },
-
-        'navtemplate': None,
-        'HOST_DATA': settings.HOST_DATA,
-        'breadcrumbs': breadcrumbs,
-
-        'archives': ARCHIVES,
-        'userspaces': userspaces,
     }
 
     return render(request, template, context)
@@ -88,9 +80,11 @@ def page(request, url, command=None):
     template = 'page.html'
     title = 'A page at some place'
 
-    breadcrumbs = [
-        ('/', 'HOME'),
-    ]
+    context = build_context(request)
+    css_app = ''
+    css_screen = context['stylesheets']['screen']
+    css_printer = context['stylesheets']['printer']
+    print "HERE", css_screen
 
 #   Process the url: is is a username?
     bits = url.split('/')
@@ -125,7 +119,7 @@ def page(request, url, command=None):
         try:
             page = webnote.page.Page(docroot, address=address, baseurl=baseurl)
             title = page.title
-            breadcrumbs.extend(page.breadcrumbs())
+            context['breadcrumbs'].extend(page.breadcrumbs())
             navtemplate = 'nav_page.html'
 
 #   If a value for type is in the metadata, set a template for it.
@@ -164,8 +158,8 @@ def page(request, url, command=None):
             dc_form.fields['dc_language'].initial = "en"
 
     else:
-        breadcrumbs.append(('edit', 'edit this page'))
-        breadcrumbs.append(('new', 'new page'))
+        context['breadcrumbs'].append(('edit', 'edit this page'))
+        context['breadcrumbs'].append(('new', 'new page'))
 
     if request.POST:
         if 'newfilename' in request.POST.keys():
@@ -193,9 +187,8 @@ def page(request, url, command=None):
         dc_form = forms.DublinCoreForm(initial=request.POST)
         content_form = forms.ContentForm(initial=request.POST)
 
-    css_app =''
-    css_screen = 'css/screen.css'
-    css_printer = 'css/print.css'
+    #css_screen = 'css/screen.css'
+    #css_printer = 'css/print.css'
 
     # This is tracking an error at startup.
 
@@ -207,33 +200,21 @@ def page(request, url, command=None):
                 css_printer = 'css/' + page.metadata.metadata['stylesheet'][0]
                 css_printer += '-printer.css'
 
-    context = {
-        'docroot': docroot,
-        'address': address,
-        'baseurl': baseurl,
-        'title': title,
-        'page': page,
-        'url': url,
+    context['docroot'] = docroot
+    context['address'] = address
+    context['title'] = title
+    context['page'] = page
+    context['url'] = url
+    context['navtemplate'] = navtemplate
+    context['formsOn'] = formsOn
+    context['content_form'] = content_form
+    context['command_form'] = command_form
+    context['dc_form'] = dc_form
+    context['newfile_form'] = newfile_form
 
-        'stylesheets': {
-            'app': css_app,
-            'screen': css_screen,
-            'printer': css_printer,
-        },
-
-        'breadcrumbs': breadcrumbs,
-        'navtemplate': navtemplate,
-
-        'formsOn': formsOn,
-        'content_form': content_form,
-        'command_form': command_form,
-        'dc_form': dc_form,
-        'newfile_form': newfile_form,
-
-        'archives': ARCHIVES,
-        'HOST_DATA': settings.HOST_DATA,
-
-    }
+    context['stylesheets']['app'] = css_app
+    context['stylesheets']['screen'] = css_screen
+    context['stylesheets']['printer'] = css_printer
 
     if page:
         context['liststyle'] = page.metadata.liststyle()
@@ -374,3 +355,33 @@ def picture(request, url, picid):
 
     }
     return render(request, template, context)
+
+
+# Ancilliary functions, not views
+
+def build_context(request):
+    """Return a dictionary containing all the framework-necessary values."""
+
+    breadcrumbs = [
+        ('/', 'HOME@ ' + HOSTNAME),
+    ]
+
+    context = {
+
+        'title': None,
+        'index': None,
+        'h1': None,
+
+        'stylesheets': {
+            'app': None,
+            'screen': 'css/screen.css',
+            'printer': 'css/print.css',
+        },
+
+        'navtemplate': None,
+        'breadcrumbs': breadcrumbs,
+
+        'archives': ARCHIVES,
+    }
+
+    return context

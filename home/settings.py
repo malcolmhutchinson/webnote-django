@@ -126,9 +126,3 @@ STATIC_ROOT = '/var/www/localnote/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
-HOST_DATA = {
-    'hostname': socket.gethostname(),
-    'userdir': '', #os.path.join(os.environ['HOME'], 'www'),
-    'username': getpass.getuser(),
-}

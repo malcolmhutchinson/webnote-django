@@ -30,7 +30,8 @@
 <div id='header'>
 
     <ul>
-{% for crumb in breadcrumbs %}{% if crumb.0 %}        <li><a href='{{ crumb.0 }}'>{{ crumb.1 }}</a></li>
+      {% for crumb in breadcrumbs %}{% if crumb.0 %}
+      <li><a href='{{ crumb.0 }}'>{{ crumb.1 }}</a></li>
 {% else %}        <li>{{ crumb.1 }}</li>
 {% endif %}
 {% endfor %}
