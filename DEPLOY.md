@@ -67,7 +67,7 @@ can be enabled by linking them from `sides-enabled` as needed.
 We will create a configuration file, and then enable it using a Debian
 utility. In shell:
 
-    cd /etc/apache
+    cd /etc/apache2
     sudo emacs sites-available/localnote.conf
 
 Into that file, place the following code:
@@ -105,7 +105,7 @@ Into that file, place the following code:
 
 Enable this with the Debian apache utility `a2ensite`, and disable the existing default.
 
-    sudo a2ensite localhost
+    sudo a2ensite localnote
     sudo a2dissite 000-default
 
 
