@@ -8,9 +8,15 @@ https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
 from django.core.wsgi import get_wsgi_application
+
+sys.path.append('/opt/localhost/code')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "home.settings")
 
 application = get_wsgi_application()
+
+
+

@@ -1,0 +1,76 @@
+<html>
+  <head>
+
+    <title>localnote server -  static index</title>
+
+
+
+    <style>
+
+      body: {
+      background: white;
+      font-family: sans-serif;
+      }
+      
+      h1:{
+      margin-top: 16em;
+      text-align:centre;
+      font-family: serif;
+      }
+
+      p: {
+          max-width: 45em;
+      }
+
+    </style>
+    
+
+  </head>
+
+  <body>
+
+
+<h1>This is localnote</h1>
+
+<p>You should only see this page if the webserver is not engaging the
+  webserver code. This means you will have to edit the file</p>
+
+<pre>/etc/apache2/sites-available/localnote.conf</pre>
+
+<p>Make it look something like this:</p>
+
+<pre><VirtualHost *:80>
+        # Adapted from Debian default script, with redundant stanzas
+        # removed, and comments deleted.
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/localnote
+        ServerName localnote
+        ServerAlias localnote.hikurangi www.localnote.hikurangi
+
+        ErrorLog ${APACHE_LOG_DIR}/error_localnote.log
+        CustomLog ${APACHE_LOG_DIR}/access_localnote.log combined
+
+        <Directory '/opt/localnote/code/home/'>
+                <Files 'wsgi.py'>
+                        Require all granted
+                </Files>
+        </Directory>
+
+        # WSGI daemon mode, which will not interfere with other
+        # virtual hosts.
+        WSGIDaemonProcess localnote \
+            python-path=/opt/localnote/env/lib/python2.7/site-packages:/opt/localnote/code \
+            python-home=/opt/localnote/env
+
+        WSGIProcessGroup localnote
+        WSGIScriptAlias / /opt/localnote/code/home/wsgi.py
+
+        Alias /static/ /var/www/localnote/
+
+</VirtualHost>
+</pre>
+
+
+</body>
+</html>
