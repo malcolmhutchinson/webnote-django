@@ -34,7 +34,6 @@ def index(request):
     variable.
 
     """
-    print "HERE"
 
     userspaces = []
     baseurl = None
