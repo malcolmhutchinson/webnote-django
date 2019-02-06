@@ -54,15 +54,17 @@ class CommandForm(forms.Form):
 
 class ContentForm(forms.Form):
 
-    dc_title = forms.CharField(
+    title = forms.CharField(
         max_length=255, required=False, label='title')
-    dc_subject = forms.CharField(
+    subject = forms.CharField(
         max_length=255, required=False, label='keywords')
-    dc_description = forms.CharField(
-        max_length=255, required=False, label='description')
+    description = forms.CharField(
+        max_length=255, required=False, label='description',
+        widget=forms.Textarea(attrs={'rows': 4, 'cols': 40, })
+    )
     content = forms.CharField(
         label='', required=False,
-        widget=forms.Textarea(attrs={'rows': 10, 'cols': 80, })
+        widget=forms.Textarea(attrs={'rows': 10, 'cols': 40, })
     )
 
 

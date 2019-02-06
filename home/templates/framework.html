@@ -35,25 +35,16 @@
 {% else %}        <li>{{ crumb.1 }}</li>
 {% endif %}
 {% endfor %}
-{% if page.wordcount %}
-        <li>Word count: {{ page.wordcount|intcomma }}</li>{% endif %}
     </ul>
 
 </div>
 
-    <div id='main'>
+<div id='main'>
 {% block main %}{% endblock %}
-    </div>
+</div>
 
-    <div id='navigation'>
+<div id='navigation'>
 
-        <h3>archives</h3>
-
-        <ol>
-{% for item in nav.k %}
-
-{% endfor %}
-        </ol>
 {% if navtemplate %}
 {% include navtemplate %}
 {% endif %}

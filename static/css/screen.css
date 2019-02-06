@@ -134,8 +134,26 @@ th, td {
 #navigation {
     font-size: 80%;
     display: inline;
-    width: 30%;
-    float: right;
+    width: 300px;
+    position: fixed;
+    right: 0;
+    top: 15;
+    border-left: black 1px solid;
+    height: 100%;
+    padding: 0.5em;
+    margin-top: 30px;
+    overflow-y: auto;
+}
+
+#navigation ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#navigation ol li{
+    margin-bottom: .5em;
+
 }
 
 #navcontent {
@@ -143,7 +161,6 @@ th, td {
 }
 
 #navcontent ol {
-    max-height: 10em;
     overflow: auto;
     padding: 0;
 }

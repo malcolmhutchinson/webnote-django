@@ -84,7 +84,7 @@ def page(request, url, command=None):
     css_app = ''
     css_screen = context['stylesheets']['screen']
     css_printer = context['stylesheets']['printer']
-    print "HERE", css_screen
+
 
 #   Process the url: is is a username?
     bits = url.split('/')
@@ -133,8 +133,8 @@ def page(request, url, command=None):
 
     if command == 'edit' or command == 'new':
 
-        template = 'editpage.html'
-        navtemplate = 'nav_editpage.html'
+        template = 'page.html'
+        navtemplate = 'nav_page.html'
         formsOn = True
 
         formdata = page.formdata()
@@ -153,13 +153,9 @@ def page(request, url, command=None):
             command_form = forms.CommandForm()
             dc_form = forms.DublinCoreForm()
             content_form.fields['content'].initial = ""
-            dc_form.fields['dc_creator'].initial = "M.G.Hutchinson"
+            dc_form.fields['dc_creator'].initial = ""
             dc_form.fields['dc_format'].initial = "text/markup"
             dc_form.fields['dc_language'].initial = "en"
-
-    else:
-        context['breadcrumbs'].append(('edit', 'edit this page'))
-        context['breadcrumbs'].append(('new', 'new page'))
 
     if request.POST:
         if 'newfilename' in request.POST.keys():
@@ -177,10 +173,10 @@ def page(request, url, command=None):
                 data=request.POST,
             )
             page.save(request.POST, files=request.FILES)
+            
             return redirect(os.path.join(baseurl, address))
 
         page.save(request.POST, files=request.FILES)
-        # Is this necessary, given the save operation above?
         page = webnote.page.Page(docroot, address=address, baseurl=baseurl)
 
         command_form = forms.CommandForm(initial=request.POST)
@@ -381,7 +377,5 @@ def build_context(request):
         'navtemplate': None,
         'breadcrumbs': breadcrumbs,
 
-        'archives': ARCHIVES,
     }
-
     return context

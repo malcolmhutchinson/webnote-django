@@ -1,25 +1,124 @@
 <!-- nav_page.html -->
 {% load humanize %}
-<div id='navcontent'>
+<table style='width: 100%; border-bottom: black 1px solid; margin-bottom: .5em;'>
+  <tr>
+    <th>title</th>
+    <td>{{ page.metadata.title }}<td>
+  </tr>
+  <tr>
+    <th>subject</th>
+    <td>{{ page.metadata.subject }}<td>
+  </tr>
+  <tr>
+    <th>description</th>
+    <td>{{ page.metadata.description }}<td>
+  </tr>
+  <tr>
+    <th>word count</th>
+    <td>{{ page.wordcount|intcomma }}<td>
+  </tr>
+  <tr>
+    <td colspan='2' style='border-top: black 1px solid;'><td>
+  </tr>
+  <tr>
+    <th>parent</th>
+    <td><a href='{{ page.parent.url }}'>{{ page.parent.title }}</a><td>
+  </tr>
+  <tr>
+    <th></th>
+    <td><td>
+  </tr>
+  <tr>
+    <th></th>
+    <td><td>
+  </tr> 
+</table>
 
-    <h3>subject</h3>
+{% if content_form %}<div style='editform'>
 
-    <p>{{ page.metadata.subject }}</p>
+<input name='command' value='save' type='submit' />
+  {% if newfile_form %}{{ newfile_form.as_p }}{% endif %}
+  
+
+  {{ content_form.non_field_errors }}
+  
+  <div class='fieldWrapper'>
+    {{ content_form.title.errors }}
+    <label for='{{ subject_form.title.id_for_label }}'>title</label><br />
+    {{ content_form.title }}
+  </div>  
+
+  <div class='fieldWrapper'>
+    {{ content_form.subject.errors }}
+    <label for='{{ subject_form.subject.id_for_label }}'>keywords (subject, tags)</label><br />
+    {{ content_form.subject }}
+  </div>  
+
+  <div class='fieldWrapper'>
+    {{ content_form.description.errors }}
+    <label for='{{ subject_form.description.id_for_label }}'>description</label><br />
+    {{ content_form.description }}
+  </div>  
+
+  <div class='fieldWrapper'>
+    {{ content_form.content.errors }}
+    <label for='{{ subject_form.content.id_for_label }}'>content</label><br />
+    {{ content_form.content }}
+  </div>  
+
+</div>
+{% if command_form %}
+
+<table>
+{{ command_form }}
+</table>
+
+{{ command_form.non_field_errors }}
+  <div class='fieldWrapper'>
+    {{ command_form.sort.errors }}
+    <label for='{{ command_form.sort.id_for_label }}'>sort</label><br />
+    {{ comand_form.sort }}
+  </div>  
+
+  <div class='fieldWrapper'>
+    {{ command_form.liststyle.errors }}
+    <label for='{{ command_form.liststyle.id_for_label }}'>list style</label><br />
+    {{ comand_form.liststyle }}
+  </div>  
+
+  <div class='fieldWrapper'>
+    {{ command_form.stylesheet.errors }}
+    <label for='{{ command_form.stylesheet.id_for_label }}'>stylesheet</label><br />
+    {{ comand_form.stylesheet }}
+  </div>  
+
+  <div class='fieldWrapper'>
+    {{ command_form..errors }}
+    <label for='{{ command_form.status.id_for_label }}'>status</label><br />
+    {{ comand_form.status }}
+  </div>  
+
+  <div class='fieldWrapper'>
+    {{ command_form.type.errors }}
+    <label for='{{ command_form.type.id_for_label }}'>type</label><br />
+    {{ comand_form.type }}
+  </div>  
+
+  <div class='fieldWrapper'>
+    {{ command_form.filename.errors }}
+    <label for='{{ command_form.filename.id_for_label }}'>Uload file</label><br />
+    {{ comand_form.filename }}
+  </div>  
 
 
-    <h3>description</h3>
 
-    <p>{{ page.metadata.description }}</p>
-
-
-    <h3>parent</h3>
-
-    <ol>
-
-        <li><a href='{{ page.parent.url }}'>{{ page.parent.title }}</a></li>
+{% endif %}
+{% else %}
+<p><a href='{{ page.url }}/edit/'>edit this page</a> |
+  <a href='{{ page.url }}/new/'>create a new page here</a></p>
+{% endif %}
 
 
-    </ol>
 {% if page.siblings %}
     <h3>siblings</h3>
 
@@ -33,16 +132,5 @@
 {% endfor %}
         </ol>{% endif %}
 
-{% if page.children %}
-        <h3>children</h3>
 
-        <ol id='children'>
-{% for child in page.children %}
-            <li><a href='{{ child.url }}'>{{ child.title }}</a></li>
-{% endfor %}
-        </ol>{% endif %}
-
-
- <p>Word count: {{ page.wordcount|intcomma }}</p>
-</div>
 <!-- end nav_page.html -->
