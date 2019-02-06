@@ -41,6 +41,23 @@ code {
     font-size: 120%;
 }
 
+div.form textarea, div.form input[type='text'] {
+    width: 90%;
+    font-size: 95%;
+}
+
+div.form th {
+    font-size: 80%;
+}
+
+
+h1 {
+    font-size: 120%;
+}
+
+h2 {
+    font-size: 100%;
+}
 h3 {
     font-size: 100%;
 }
