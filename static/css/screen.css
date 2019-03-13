@@ -5,7 +5,7 @@
 html {
     font-family: sans-serif;
     margin: 0px;
-
+    padding-bottom: 30px;
 }
 body {
     background-size: 100%;
@@ -103,8 +103,6 @@ th, td {
     font-family: sans-serif;
     font-size: 90%;
     position: fixed;
-    bottom: 3px;
-    height: 30px;
     width: 100%;
 }
 
@@ -125,6 +123,7 @@ th, td {
     font-family: sans-serif;
     font-size: 90%;
     position: fixed;
+    bottom: 1px;
     height: 30px;
     width: 100%;
 }
@@ -150,6 +149,7 @@ th, td {
 
 #navigation {
     font-size: 80%;
+    background: white;
     display: inline;
     width: 300px;
     position: fixed;
@@ -159,6 +159,7 @@ th, td {
     height: 100%;
     padding: 0.5em;
     margin-top: 30px;
+    margin-bottom: 30px;
     overflow-y: auto;
 }
 

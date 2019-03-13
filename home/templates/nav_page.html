@@ -91,6 +91,17 @@
 {% endif %}
 
 
+{% if page.heading_index %}
+<h3 style='border-top: black solid 1px;
+    margin-top: .5em; buffer-top: .5em;
+    padding-top: .5em;'>headings</h3>
+
+<ol>{% for item in page.heading_index %}
+    <li><a href='#{{ item.0 }}'>{{ item.1 }}</a></li>
+{% endfor %}</ol>
+{% endif %}
+
+
 {% if page.siblings %}
 <h3 style='border-top: black solid 1px;
     margin-top: .5em; buffer-top: .5em;
