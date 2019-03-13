@@ -156,8 +156,9 @@ def page(request, url, command=None):
             dc_form.fields['dc_creator'].initial = ""
             dc_form.fields['dc_format'].initial = "text/markup"
             dc_form.fields['dc_language'].initial = "en"
-
+            
     if request.POST:
+        
         if 'newfilename' in request.POST.keys():
 
             address = os.path.join(
@@ -183,11 +184,6 @@ def page(request, url, command=None):
         dc_form = forms.DublinCoreForm(initial=request.POST)
         content_form = forms.ContentForm(initial=request.POST)
 
-    #css_screen = 'css/screen.css'
-    #css_printer = 'css/print.css'
-
-    # This is tracking an error at startup.
-
     if page:
         if page.metadata.metadata['stylesheet']:
             if not page.metadata.metadata['stylesheet'][0] == 'normal':
@@ -211,6 +207,10 @@ def page(request, url, command=None):
     context['stylesheets']['app'] = css_app
     context['stylesheets']['screen'] = css_screen
     context['stylesheets']['printer'] = css_printer
+
+    if request.GET:
+        if request.GET['view']:
+            template = request.GET['view'] + '.html'
 
     if page:
         context['liststyle'] = page.metadata.liststyle()
@@ -373,6 +373,7 @@ def build_context(request):
             'screen': 'css/screen.css',
             'printer': 'css/print.css',
         },
+        'jsortable': True,
 
         'navtemplate': None,
         'breadcrumbs': breadcrumbs,

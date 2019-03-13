@@ -1,0 +1,34 @@
+{% extends 'framework.html' %}{% block main %}{% load staticfiles %}
+<!-- concordence.html -->
+<div id='pagecontent'>
+
+  <h3>Concordance for {{ page.title }}</h3>
+
+  <p>{{ page.concordance|length }} individual words counted.</p>
+
+  <table class='sortable'
+         style='font-size: 80%;'>
+    <tr>
+      <th>word</th>
+      <th>count</th>
+    </tr>    
+  {% for key, value in page.concordance %}
+    <tr>
+      <td>{{ key }}</td>
+      <td>{{ value }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+
+</div><!-- Close pagecontent -->
+
+{% if page.children %}
+{% if liststyle %}
+
+{% include liststyle %}
+{% else %}
+{% include 'liststyles/default.html' %}
+{% endif %}
+{% endif %}
+<!-- end concordence.html -->
+{% endblock %}
