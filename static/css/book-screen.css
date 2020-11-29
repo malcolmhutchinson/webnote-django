@@ -14,8 +14,8 @@
     text-align: center;
     text-transform: uppercase;
     letter-spacing: .5em;
-    margin-top: 5em;
-    margin-bottom: 5em;
+    margin-top: 3em;
+    margin-bottom: 3em;
 }
 
 #pagecontent h2 {
@@ -42,11 +42,17 @@
     line-height: 160%;
     text-align: justify;
     margin: 0;
-    text-indent: 1em;
+    text-indent: 3em;
 }
 
 #pagecontent hr {
     margin-top: 5em;
     margin-bottom: 5em;
     page-break-before: avoid;
+}
+#pagecontent hr {
+    visibility: hidden;
+    margin-top: 2em;
+    margin-bottom: 1em;
+              
 }

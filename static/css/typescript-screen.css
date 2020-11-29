@@ -37,13 +37,19 @@
 
 #pagecontent p {
     line-height: 250%;
-}
-
-#pagecontent hr {
-    margin-top: 5em;
-    margin-bottom: 5em;
+    margin: 0;
+    text-indent: 3em;
 }
 
 #pagecontent pre {
     font-size: 80%;
+}
+
+#pagecontent hr {
+    visibility: hidden;
+    width: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    margin-bottom: 1em;         
 }

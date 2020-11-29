@@ -17,9 +17,6 @@ h1, h2, h3 {
     page-break-after: avoid;
 }
 
-p {
-    page-break-inside: avoid;
-}
 
 pre {
     font-size: 8pt;
