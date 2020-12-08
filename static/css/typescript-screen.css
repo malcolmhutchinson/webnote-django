@@ -5,7 +5,7 @@
 
 #pagecontent {
     font-family: monospace;
-    max-width: 50em;
+    max-width: 40em;
     font-size: 16px;
 }
 
@@ -41,6 +41,10 @@
     text-indent: 3em;
 }
 
+#pagecontent p em {
+    text-decoration: underline;
+    font-style: normal;
+}
 #pagecontent pre {
     font-size: 80%;
 }

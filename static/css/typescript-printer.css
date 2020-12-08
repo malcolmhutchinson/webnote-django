@@ -7,6 +7,7 @@
     size: A4 landscape;
     margin: 3cm;
     margin-top: 2cm;
+    margin-bottom: 2cm;
 }
 
 body {
@@ -22,7 +23,7 @@ pre {
     font-size: 8pt;
 }
 
-#header, #navigation, #contentse {
+#header, #navigation, #contents {
     display: none;
 }
 #main {
@@ -38,7 +39,7 @@ pre {
 }
 
 #pagecontent h2 {
-    page-break-before: always;: 0;
+    page-break-before: always;
     padding-top: 30em;
     margin-bottom: 3em;
 }
