@@ -108,16 +108,14 @@
     margin-top: .5em; buffer-top: .5em;
     padding-top: .5em;'>siblings</h3>
 
-{% for item in page.parent.children %}
         <ol>
-{% if item.url %}
-            <li><a href='{{ item.url }}'>{{ item.title }}</a></li>
+{% for item in page.parent.children %}
+{% if item.url == page.url %}
+            <li>{{ item.title }}</li>
 {% else %}
-            <li>{{ item.1 }}</li>
+            <li><a href='{{ item.url }}'>{{ item.title }}</a></li>
 {% endif %}
-{% endfor %}
-
-        </ol>
+{% endfor %}        </ol>
 {% endif %}
 
 
