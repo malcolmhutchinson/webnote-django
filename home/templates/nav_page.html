@@ -102,20 +102,24 @@
 {% endif %}
 
 
-{% if page.siblings %}
+{% if page.parent.children %}
+
 <h3 style='border-top: black solid 1px;
     margin-top: .5em; buffer-top: .5em;
     padding-top: .5em;'>siblings</h3>
 
+{% for item in page.parent.children %}
         <ol>
-{% for item in page.siblings %}
 {% if item.url %}
             <li><a href='{{ item.url }}'>{{ item.title }}</a></li>
 {% else %}
             <li>{{ item.1 }}</li>
 {% endif %}
 {% endfor %}
-        </ol>{% endif %}
+
+        </ol>
+{% endif %}
+
 
 
 <!-- end nav_page.html -->

@@ -66,7 +66,7 @@ def index(request):
 
 def page(request, url, command=None):
     """Display a requested page.."""
-
+    print "HERE"
     address = ''
     baseurl = None
     command_form = None
