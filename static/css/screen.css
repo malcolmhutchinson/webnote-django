@@ -160,6 +160,7 @@ th, td {
     padding: 0.5em;
     margin-top: 30px;
     margin-bottom: 30px;
+    max-height: 90%;
     overflow-y: auto;
 }
 
@@ -175,7 +176,7 @@ th, td {
 }
 
 #navcontent {
-   margin: 0 1em 0 2em;
+    margin: 0 1em 0 2em;
 }
 
 #navcontent ol {

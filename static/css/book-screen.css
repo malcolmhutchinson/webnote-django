@@ -5,7 +5,7 @@
 
 #pagecontent {
     font-family: serif;
-
+    max-width: 33em;
 }
 
 #pagecontent h1 {
@@ -42,7 +42,7 @@
     line-height: 160%;
     text-align: justify;
     margin: 0;
-    text-indent: 3em;
+    text-indent: 2em;
 }
 
 #pagecontent hr {

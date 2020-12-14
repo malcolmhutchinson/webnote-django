@@ -108,7 +108,10 @@
     margin-top: .5em; buffer-top: .5em;
     padding-top: .5em;'>siblings</h3>
 
-        <ol>
+        <ol style='border-bottom: black 1px solid;
+                   margin-bottom: 3em;
+                  '>
+
 {% for item in page.parent.children %}
 {% if item.url == page.url %}
             <li>{{ item.title }}</li>
@@ -117,7 +120,4 @@
 {% endif %}
 {% endfor %}        </ol>
 {% endif %}
-
-
-
 <!-- end nav_page.html -->
